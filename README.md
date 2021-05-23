@@ -13,6 +13,10 @@ Originally written to help automate community copy rewards based on purchases an
 * Add/update/delete rewards
 * Fetch and update game theme and custom CSS data
 
+## How fragile is it?
+
+Very fragile. Enjoy it while it lasts!
+
 ## Installation
 
 Add this line to your application's Gemfile:
