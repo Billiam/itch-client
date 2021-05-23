@@ -101,8 +101,6 @@ client.purchases.history_by_month(5, 2019)
 
 ## Games
 
-Games are currently placeholder elements, used only for fetching sub-resources.
-
 Find game by ID
 
 ```ruby
@@ -115,6 +113,57 @@ Find game by name
 client.game(name: 'MyItchGame')
 client.id
 # => 12345
+```
+
+### Game theme
+
+Fetch game theme information
+
+```ruby
+client.game(12345).theme
+#=> {
+#  "link_color"=>"#00ff00",
+#  "screenshots_loc"=>"hidden",
+#  "button_color"=>"#00ff00",
+#  "banner_position"=>"align_center",
+#  "background_repeat"=>"repeat-x",
+#  "default_screenshots_loc"=>"sidebar",
+#  "background_position"=>"align_right",
+#  "header_font_family"=>"serif",
+#  "background_image"=>
+#   {"url"=>"https://itch.io/dashboard/upload-image?upload_id=54321",
+#    "thumb_url"=>"https://img.itch.zone/aBcDeFgHiJkLmNoPqRsTuVwXyZ/original/aBcDe.png",
+#    "id"=>6027863},
+#  "font_size"=>"large",
+#  "bg_color"=>"#00ff00",
+#  "header_text_color"=>"#00ff00",
+#  "css"=>"body { color: blue; }",
+#  "bg2_color"=>"#00ff00",
+#  "banner_image"=>
+#   {"url"=>"https://itch.io/dashboard/upload-image?upload_id=12345",
+#    "thumb_url"=>"https://img.itch.zone/aBcDeFgHiJkLmNoPqRsTuVwXyZ/original/aBcDe.png",
+#    "id"=>12345678},
+#  "text_color"=>"#00ff00",
+#  "font_family"=>"pixel"
+# }
+```
+
+Update game theme information
+
+```ruby
+game = client.game(12345)
+new_theme = game.theme
+new_theme['button_color'] = "#cccccc"
+new_theme['css'] = "body { background-color: orange; }"
+game.theme = new_theme
+```
+
+CSS Shortcuts
+
+```ruby
+client.game(12345).css
+#=> body { background-color: orange; }
+client.game(12345).css = "body { background-color: green; }"
 ```
 
 ### Rewards

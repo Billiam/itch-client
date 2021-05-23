@@ -17,10 +17,6 @@ module Itch
       @agent = agent
     end
 
-    def call(name)
-      map[name]
-    end
-
     def map
       @map ||= begin
         page = with_login do
@@ -31,15 +27,42 @@ module Itch
       end
     end
 
+    def find_by_name(name)
+      map[name]
+    end
+
+    def find_by_name!(name)
+      result = find_by_name(name)
+      raise Error, "Cannot find game with name #{name}" unless result
+
+      result
+    end
+
+    def find!(id)
+      result = find(id)
+      raise Error, "Cannot find game with id #{id}" unless result
+
+      result
+    end
+
+    def find(id)
+      id = id.to_s
+      map.find do |_key, value|
+        value[:id] == id
+      end
+    end
+
     protected
 
     def parse_dashboard(page)
       page.css(".game_row").map do |row|
-        name = row.at_css(".game_title .game_link").text
+        title = row.at_css(".game_title .game_link")
+        name = title.text
+        url = title["href"]
         edit_url = row.at_xpath('.//a[text()="Edit"]/@href').value
 
         id = edit_url.match(%r{/game/edit/(\d+)})[1]
-        [name, id] if id && name
+        [name, { id: id, url: url, name: name }] if id && name
       end.compact.to_h
     end
   end
