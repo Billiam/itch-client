@@ -2,13 +2,13 @@
 
 source "https://rubygems.org"
 
-git_source(:github) { |repo_name| "https://github.com/#{repo_name}" }
+# Specify your gem's dependencies in itch.gemspec
+gemspec
 
-# gem "rails"
+gem "rake", "~> 13.0"
 
-gem "mechanize", "~> 2.8"
+gem "rspec", "~> 3.0"
 
-gem "dotenv", "~> 2.7"
-gem "pry"
+gem "rubocop", "~> 1.7"
 
-gem "table_print", "~> 1.5"
+gem "irb", "~> 1.3"
