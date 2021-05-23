@@ -22,7 +22,7 @@ Very fragile. Enjoy it while it lasts!
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'itch-client'
+gem 'itch_client'
 ```
 
 And then execute:
@@ -31,7 +31,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install itch-client
+    $ gem install itch_client
 
 ## Usage
 

@@ -3,7 +3,7 @@
 require_relative "lib/itch/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "itch-client"
+  spec.name          = "itch_client"
   spec.version       = Itch::VERSION
   spec.authors       = ["Billiam"]
   spec.email         = ["billiamthesecond@gmail.com"]

@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    itch-client (0.1.0)
+    itch_client (0.1.0)
       mechanize (~> 2.8)
 
 GEM
@@ -87,7 +87,7 @@ PLATFORMS
 
 DEPENDENCIES
   irb (~> 1.3)
-  itch-client!
+  itch_client!
   rake (~> 13.0)
   rspec (~> 3.0)
   rubocop (~> 1.7)
