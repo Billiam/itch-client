@@ -1,6 +1,6 @@
-# Itch 
+# Itch Client
 
-An itch.io screenscraper and automation utility.
+An itch.io screenscraping and automation utility.
 
 Originally written to help automate community copy rewards based on purchases and tips.
 
@@ -11,6 +11,7 @@ Originally written to help automate community copy rewards based on purchases an
 * Fetch and parse reward redemption CSV data
 * Fetch reward data
 * Add/update/delete rewards
+* Fetch and update game theme and custom CSS data
 
 ## Installation
 
