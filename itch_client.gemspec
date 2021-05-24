@@ -23,5 +23,5 @@ Gem::Specification.new do |spec|
   spec.bindir        = "bin"
   spec.require_paths = ["lib"]
 
-  spec.add_dependency "mechanize", "~> 2.8"
+  spec.add_runtime_dependency "mechanize", "~> 2.8"
 end

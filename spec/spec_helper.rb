@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "itch"
+require "itch_client"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
