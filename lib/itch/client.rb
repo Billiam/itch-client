@@ -22,7 +22,7 @@ module Itch
 
     def initialize(username: nil, password: nil, cookie_path: nil)
       @agent = Mechanize.new
-      @auth = Auth.new(@agent, username: username, password: password, cookie_path: @cookie_path)
+      @auth = Auth.new(@agent, username: username, password: password, cookie_path: cookie_path)
 
       @agent.cookie_jar.load(cookie_path) if cookie_path && File.readable?(cookie_path)
     end
