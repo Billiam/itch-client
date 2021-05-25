@@ -90,7 +90,7 @@ module Itch
       if page_is_login?(page)
         # Login failed
         errors = page.css(".form_errors li").map(&:text)
-        raise AuthError, "#{errors.size} error#{errors.size == 1 ? "" : "s"} prevented login", errors
+        raise AuthError.new("#{errors.size} error#{errors.size == 1 ? "" : "s"} prevented login", errors: errors)
       end
 
       page
