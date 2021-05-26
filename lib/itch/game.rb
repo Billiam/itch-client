@@ -56,7 +56,7 @@ module Itch
 
     def load_game_info(id, name)
       if id
-        data = @map.find!(id)[:url]
+        data = @map.find!(id)
       elsif name
         data = @map.find_by_name!(name)
       else

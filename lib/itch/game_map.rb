@@ -47,7 +47,7 @@ module Itch
 
     def find(id)
       id = id.to_s
-      map.find do |_key, value|
+      map.values.find do |value|
         value[:id] == id
       end
     end
