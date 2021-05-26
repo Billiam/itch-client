@@ -41,7 +41,7 @@ module Itch
     def save(rewards)
       _rewards, noun = fetch_rewards_data
 
-      build_post_data(rewards, noun)
+      post_data = build_post_data(rewards, noun)
 
       @agent.post rewards_url, post_data
 
