@@ -6,12 +6,14 @@ require "json"
 require_relative "require_auth"
 require_relative "simple_inspect"
 require_relative "reward"
+require_relative "request"
 
 module Itch
   # Fetch rewards and history
   class Rewards
     include SimpleInspect
     include RequireAuth
+    include Request
 
     REWARD_DATA = /GameEdit\.EditRewards\(.*?(?:"rewards":(\[.*\]),)?"reward_noun":"(.*(?<!\\))"}\)/.freeze
 
@@ -25,7 +27,7 @@ module Itch
         @agent.get(csv_url)
       end
 
-      validate_response(page)
+      validate_response(page, action: "fetching reward CSV", content_type: "text/csv")
 
       CSV.new(page.content, headers: true)
     end
@@ -43,7 +45,9 @@ module Itch
 
       post_data = build_post_data(rewards, noun)
 
-      @agent.post rewards_url, post_data
+      result = @agent.post rewards_url, post_data
+
+      validate_response(result, action: "updating rewards")
 
       list
     end
@@ -95,17 +99,6 @@ module Itch
       end.text
 
       REWARD_DATA.match(script)[1..]
-    end
-
-    def validate_response(page)
-      content_type = page.response["content-type"]
-      return if page.code == "200" && content_type == "text/csv"
-
-      if content_type == "application/json"
-        raise Error, "Unexpected error occurred while fetching reward CSV: #{page.content}"
-      end
-
-      raise Error, "Unexpected error occurred while fetching reward CSV: Response code #{page.code}"
     end
 
     def parse_row(row)

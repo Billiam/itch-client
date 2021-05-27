@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    itch_client (0.1.0)
+    itch_client (0.2.0)
       mechanize (~> 2.8)
 
 GEM

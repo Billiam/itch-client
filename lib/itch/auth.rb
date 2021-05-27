@@ -30,6 +30,8 @@ module Itch
       submit_2fa(page) if page_is_2fa?(page)
 
       save_cookies
+
+      logged_in?
     end
 
     def page_is_login?(page)
@@ -41,6 +43,10 @@ module Itch
     end
 
     protected
+
+    def exclude_inspection
+      super + [:@password]
+    end
 
     def save_cookies
       @agent.cookie_jar.save(@cookie_path) if @cookie_path
