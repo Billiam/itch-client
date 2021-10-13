@@ -252,6 +252,23 @@ filtered_rewards = rewards.select do |reward|
 end
 client.game(12345).rewards.save(filtered_rewards)
 ```
+### Bundles
+
+Fetch current bundles
+
+```ruby
+client.bundles.list
+
+#=>
+[
+  #<Itch::Bundle:0x0000557aa98c7930
+  @id="123",
+  @earnings=BigDecimal(123.00),
+  @price=BigDecimal(10.00),
+  @purchases=10,
+  @title="My Bundle!"
+]
+```
 
 ## Development
 
