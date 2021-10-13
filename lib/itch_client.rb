@@ -28,6 +28,8 @@ module Itch
 
   module URL
     DASHBOARD = "https://itch.io/dashboard"
+    BUNDLES = "https://itch.io/dashboard/bundles"
+    BUNDLE = "https://itch.io/bundle/%<id>d"
     EDIT_GAME = "https://itch.io/game/edit/%<id>d"
     GAME = "https://%<username>s.itch.io/%<slug>s"
     LOGIN = "https://itch.io/login"

@@ -4,6 +4,7 @@ require "forwardable"
 require "mechanize"
 
 require_relative "auth"
+require_relative "bundles"
 require_relative "game"
 require_relative "game_map"
 require_relative "purchases"
@@ -33,6 +34,10 @@ module Itch
 
     def purchases
       @purchases ||= Purchases.new(@agent)
+    end
+
+    def bundles
+      @bundles ||= Bundles.new(@agent)
     end
 
     def game_map
