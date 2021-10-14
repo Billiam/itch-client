@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative "simple_inspect"
 
 module Itch
@@ -7,7 +9,6 @@ module Itch
 
     attr_accessor :id, :title, :games, :purchases, :price, :earnings
 
-    # rubocop:disable Metrics/ParameterLists
     def initialize(id, title, purchases, price, earnings)
       @id = id
       @title = title
@@ -15,7 +16,6 @@ module Itch
       @price = price
       @earnings = earnings
     end
-    # rubocop:enable Metrics/ParameterLists
 
     def url
       format(Itch::URL::BUNDLE, id: @id)
