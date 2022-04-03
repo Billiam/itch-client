@@ -1,3 +1,7 @@
+## [0.4.0] - 2022-04-03
+
+- Added review list
+
 ## [0.3.0] - 2021-10-13
 
 - Added bundle list
