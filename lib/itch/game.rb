@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require_relative "reviews"
 require_relative "rewards"
 require_relative "reward"
 require_relative "require_auth"
@@ -46,6 +47,10 @@ module Itch
 
     def rewards
       Rewards.new(@agent, @id)
+    end
+
+    def reviews
+      Reviews.new(@agent, @id)
     end
 
     def reward(id)

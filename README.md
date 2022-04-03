@@ -171,6 +171,27 @@ client.game(12345).css
 client.game(12345).css = "body { background-color: green; }"
 ```
 
+### Reviews
+
+Fetch current reviews
+
+```ruby
+reviews = client.game(12345).reviews.list
+#=>
+[
+  #<Itch::Review:0x0000557aa98c7930
+  @id="123456789",
+  @user_name="Billiam",
+  @user_id="billiam",
+  @date=<DateTime: 2022-04-03T10:02:00+00:00>,
+  @stars=4,
+  @review=[
+    "I really like this game",
+    "So much that I've added a second paragraph"
+  ],
+]
+```
+
 ### Rewards
 
 Fetch reward CSV data
@@ -252,7 +273,8 @@ filtered_rewards = rewards.select do |reward|
 end
 client.game(12345).rewards.save(filtered_rewards)
 ```
-### Bundles
+
+## Bundles
 
 Fetch current bundles
 
