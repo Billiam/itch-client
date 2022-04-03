@@ -24,17 +24,10 @@ module Itch
 
       page_number = 1
       loop do
-        page = with_login do
-          @agent.get(review_url(page_number))
-        end
+        page_reviews = parse_page_reviews(page_number)
 
-        raise Error, "Could not find game id #{@game_id} rewards" unless page.code == "200"
+        break if page_reviews.empty?
 
-        page_reviews = page.css(".content_column .rating").map do |row|
-          parse_row row
-        end
-
-        break if page_reviews.length == 0
         all_reviews += page_reviews
         page_number += 1
         sleep 0.5
@@ -45,17 +38,30 @@ module Itch
 
     protected
 
+    def parse_page_reviews(page_number)
+      page = with_login do
+        @agent.get(review_url(page_number))
+      end
+
+      raise Error, "Could not find game id #{@game_id} rewards" unless page.code == "200"
+
+      page.css(".content_column .rating").map do |row|
+        parse_row row
+      end
+    end
+
+    # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
     def parse_row(row)
-      id = row.at_css('button[data-lightbox_url]')['data-lightbox_url'].split('/').last
-      stars = row.css('.star_picker .icon-star').length
-      header = row.at_css('.row_header')
-      date = DateTime.parse header.at_css('abbr')['title'].strip
+      id = row.at_css("button[data-lightbox_url]")["data-lightbox_url"].split("/").last
+      stars = row.css(".star_picker .icon-star").length
+      header = row.at_css(".row_header")
+      date = DateTime.parse header.at_css("abbr")["title"].strip
 
-      user_link = header.at_css('.user_link')
-      user_name = user_link.search('./text()').text.strip
-      user_id = user_link['href'].split('/').last
+      user_link = header.at_css(".user_link")
+      user_name = user_link.search("./text()").text.strip
+      user_id = user_link["href"].split("/").last
 
-      text = row.css('.blurb p').map(&:text)
+      text = row.css(".blurb p").map(&:text)
 
       Review.new(
         id: id,
@@ -66,6 +72,7 @@ module Itch
         review: text
       )
     end
+    # rubocop:enable Metrics/MethodLength, Metrics/AbcSize
 
     def review_url(page = 1)
       format(Itch::URL::REVIEWS, id: @game_id, page: page)

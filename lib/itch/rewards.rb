@@ -106,9 +106,9 @@ module Itch
         input.name.match(/^rewards\[(\d+)\]\[id\]/)
       end.value
 
-      attributes = %w[title description amount price].map do |name|
+      attributes = %w[title description amount price].to_h do |name|
         [name.to_sym, row.css_at(".reward_#{name}_input").value]
-      end.to_h
+      end
       attributes[:claimed] = row.css_at(".claimed_count").text
 
       Reward.new(@agent, @game_id, id, attributes)
