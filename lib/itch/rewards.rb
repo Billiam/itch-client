@@ -15,7 +15,8 @@ module Itch
     include RequireAuth
     include Request
 
-    REWARD_DATA = /GameEdit\.EditRewards\(.*?(?:"rewards":(\[.*?\]),)?"reward_noun":"(.*?)(?<!\\)"/.freeze
+    REWARD_DATA = /GameEdit\.EditRewards\(.*?"rewards":(\[.*?\])/.freeze
+    REWARD_NOUN_DATA = /GameEdit\.EditRewards\(.*?"reward_noun":"(.*?)(?<!\\)"/.freeze
 
     def initialize(agent, game_id)
       @agent = agent
@@ -95,10 +96,14 @@ module Itch
       raise Error, "Could not find game id #{@game_id} rewards" unless page.code == "200"
 
       script = page.css("script").find do |node|
-        node.text =~ REWARD_DATA
-      end.text
+        node.text =~ REWARD_DATA && node.text =~ REWARD_NOUN_DATA
+      end
+      return [] unless script
+      script = script.text
 
-      REWARD_DATA.match(script)[1..]
+      data = REWARD_DATA.match(script)[1]
+      noun = REWARD_NOUN_DATA.match(script)[1]
+      [data, noun]
     end
 
     def parse_row(row)
