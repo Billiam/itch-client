@@ -12,3 +12,4 @@
 .env
 cookies.yml
 *.gem
+.tool-versions
