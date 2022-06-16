@@ -15,7 +15,7 @@ module Itch
     include RequireAuth
     include Request
 
-    REWARD_DATA = /GameEdit\.EditRewards\(.*?(?:"rewards":(\[.*\]),)?"reward_noun":"(.*(?<!\\))"}\)/.freeze
+    REWARD_DATA = /GameEdit\.EditRewards\(.*?(?:"rewards":(\[.*?\]),)?"reward_noun":"(.*?)(?<!\\)"/.freeze
 
     def initialize(agent, game_id)
       @agent = agent
