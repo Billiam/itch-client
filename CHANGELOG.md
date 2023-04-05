@@ -1,3 +1,7 @@
+## [0.4.2] - 2023-04-05
+
+- Fix reward parsing failing due to inconsistent JSON ordering
+
 ## [0.4.0] - 2022-04-03
 
 - Added review list
