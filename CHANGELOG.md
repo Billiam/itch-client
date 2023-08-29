@@ -1,3 +1,7 @@
+## [0.4.3] - 2023-08-29
+
+- Update URLs of itch.io payment CSVs
+
 ## [0.4.2] - 2023-04-05
 
 - Fix reward parsing failing due to inconsistent JSON ordering
